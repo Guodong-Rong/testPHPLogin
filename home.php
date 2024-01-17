@@ -42,6 +42,8 @@ function isUserLoggedIn() {
     // Display functions if the user is logged in
     if ($loggedIn && $result_username != null) {
         echo '<p>'.htmlspecialchars($result_username). ' logged in.</p>';
+    } else if ($loggedIn && $result_username == null){
+        echo '<p>You logged in.</p>';
     } else {
         echo '<p>Please log in to use this functionality.</p>';
         echo '<a href="login.php"><button type="button">Login</button></a>';
