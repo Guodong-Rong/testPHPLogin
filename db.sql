@@ -31,3 +31,32 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+DELIMITER //
+
+-- Create a stored procedure to get the username if username and password match
+DELIMITER //
+
+CREATE PROCEDURE GetUserByUsernameAndPassword(
+    IN p_username VARCHAR(255), 
+    IN p_password VARCHAR(255),
+    OUT result_username VARCHAR(255)
+)
+BEGIN
+    DECLARE user_id INT;
+
+    -- Check if the provided username and password match a record in the users table
+    SELECT id INTO user_id
+    FROM users
+    WHERE username = p_username AND password = p_password
+    LIMIT 1;
+
+    -- Set the output parameter based on whether a match is found
+    IF user_id IS NOT NULL THEN
+        SET result_username = p_username;
+    ELSE
+        SET result_username = NULL;
+    END IF;
+END //
+
+DELIMITER ;

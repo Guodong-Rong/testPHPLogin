@@ -1,9 +1,14 @@
 <?php
-// Include the database connection file
-include 'conn.php';
-
-// Start a session
 session_start();
+
+// Check if the user is logged in
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    // User is logged in, display the page content
+} else {
+    // User is not logged in, still display this page content
+    // header('Location: login.php');
+    // exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,11 +16,11 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>About</title>
 </head>
 <body>
-    <h2>Login Page</h2>
-    <nav>
+<h2>About Page</h2>
+<nav>
         <ul>
             <li><a href="home.php">Home</a></li>
             <li><a href="about.php">About</a></li>
@@ -28,15 +33,6 @@ session_start();
             ?> 
         </ul>
     </nav>
-    <!-- <form action="loginProcess.php" method="post"> -->
-    <form action="loginGetUsernameProcess.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <button type="submit">Login</button>
-    </form>
+    <p>You can always view this page even if you have not logged in.</p>
 </body>
 </html>
