@@ -26,7 +26,7 @@ function isUserLoggedIn() {
 
     <nav>
         <ul>
-            <li><a href="home.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
             <?php
             // Check if the user is logged in

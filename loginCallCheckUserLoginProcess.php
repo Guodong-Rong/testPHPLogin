@@ -12,14 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_password = $_POST['password'];
 
     // Prepare the call to the stored procedure
-    $stmt = $conn->prepare("CALL GetUserByUsernameAndPassword(?, ?, @result_username)");
+    $stmt = $conn->prepare("CALL CheckUserLogin(?, ?, @result)");
     $stmt->bind_param("ss", $input_username, $input_password);
 
     // Execute the stored procedure
     $stmt->execute();
 
-   // Fetch the result from the user-defined variable
-    $result_username = $conn->query("SELECT @result_username AS result_username")->fetch_assoc()['result_username'];
+    // Get the result from the stored procedure
+    $result = $conn->query("SELECT @result AS result")->fetch_assoc()['result'];
 
     // Close the statement
     $stmt->close();
@@ -28,13 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->close();
 
     // Check the result
-    if ($result_username != null) {
+    if ($result == 1) {
         // Set a session variable to indicate the user is logged in
         $_SESSION['logged_in'] = true;
-        $_SESSION['result_username'] = $result_username;
 
         // Redirect to the home page or any other page
-        header('Location: home.php');
+        header('Location: index.php');
         exit;
     } else {
         // Invalid credentials, redirect back to the login page
@@ -46,5 +45,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: login.php');
     exit;
 }
-
 ?>

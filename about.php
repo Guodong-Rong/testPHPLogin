@@ -22,7 +22,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <h2>About Page</h2>
 <nav>
         <ul>
-            <li><a href="home.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
             <?php
             // Check if the user is logged in

@@ -73,7 +73,7 @@ function test_input($data) {
 <p>You can only view this page when you logged in</p>
 <nav>
     <ul>
-        <li><a href="home.php">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="about.php">About</a></li>
         <?php
         // Check if the user is logged in

@@ -17,7 +17,7 @@ session_start();
     <h2>Login Page</h2>
     <nav>
         <ul>
-            <li><a href="home.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="about.php">About</a></li>
             <?php
             // Check if the user is logged in
@@ -29,7 +29,7 @@ session_start();
         </ul>
     </nav>
     <!-- <form action="loginProcess.php" method="post"> -->
-    <form action="loginGetUsernameProcess.php" method="post">
+    <form action="loginCallNoProcedureProcess.php" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 

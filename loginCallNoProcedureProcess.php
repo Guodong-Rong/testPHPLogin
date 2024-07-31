@@ -11,15 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_username = $_POST['username'];
     $input_password = $_POST['password'];
 
-    // Prepare the call to the stored procedure
-    $stmt = $conn->prepare("CALL CheckUserLogin(?, ?, @result)");
+    // Prepare the SQL query to check the username and password
+    $stmt = $conn->prepare("SELECT COUNT(*) as user_count FROM users WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $input_username, $input_password);
 
-    // Execute the stored procedure
+    // Execute the query
     $stmt->execute();
 
-    // Get the result from the stored procedure
-    $result = $conn->query("SELECT @result AS result")->fetch_assoc()['result'];
+    // Get the result
+    $result = $stmt->get_result()->fetch_assoc()['user_count'];
 
     // Close the statement
     $stmt->close();
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['logged_in'] = true;
 
         // Redirect to the home page or any other page
-        header('Location: home.php');
+        header('Location: index.php');
         exit;
     } else {
         // Invalid credentials, redirect back to the login page
